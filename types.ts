@@ -1,4 +1,3 @@
-
 export interface Position {
   x: number;
   y: number;
@@ -19,6 +18,13 @@ export enum GhostType {
   Clyde,  // Orange: Scared
 }
 
+export enum GhostMode {
+  Chase,
+  Scatter,
+  Frightened,
+  Eaten,
+}
+
 export interface PacmanState {
   position: Position;
   direction: Direction;
@@ -32,9 +38,18 @@ export interface GhostState {
   type: GhostType;
   position: Position;
   direction: Direction;
-  isScared: boolean;
-  isEaten: boolean;
+  mode: GhostMode;
   scatterTarget: Position;
+}
+
+export type FruitType = 'cherry' | 'strawberry' | 'orange' | 'apple' | 'melon';
+
+export interface FruitState {
+  type: FruitType;
+  position: Position;
+  visible: boolean;
+  timer: number;
+  score: number;
 }
 
 export type GameStatus = 'ready' | 'playing' | 'paused' | 'gameover' | 'won';
