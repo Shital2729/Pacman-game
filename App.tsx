@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import GameBoard from './components/GameBoard';
 import Scoreboard from './components/Scoreboard';
@@ -16,6 +15,7 @@ const App: React.FC = () => {
     ghosts,
     dots,
     powerPills,
+    fruit,
     startGame,
     isPaused,
     togglePause,
@@ -41,7 +41,7 @@ const App: React.FC = () => {
       <h1 className="text-4xl text-yellow-400 mb-2 tracking-wider">React Pac-Man</h1>
       <Scoreboard score={score} lives={lives} highScore={highScore} level={level} />
       <div className="relative w-fit border-4 border-blue-600 shadow-lg shadow-blue-400/50">
-        <GameBoard pacman={pacman} ghosts={ghosts} dots={dots} powerPills={powerPills} />
+        <GameBoard pacman={pacman} ghosts={ghosts} dots={dots} powerPills={powerPills} fruit={fruit} />
         {showOverlay && (
           <div className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center">
             <h2 className="text-5xl text-yellow-400 animate-pulse">{getMessage()}</h2>
@@ -64,6 +64,14 @@ const App: React.FC = () => {
       <div className="mt-4 text-center text-gray-400 text-sm">
         <p>Use Arrow Keys to Move. Press 'P' to Pause.</p>
         <p>Eat all dots to win. Avoid the ghosts!</p>
+        {(gameStatus === 'playing' || isPaused) && (
+            <button
+              onClick={startGame}
+              className="mt-4 px-4 py-2 bg-red-600 text-white font-bold rounded hover:bg-red-500 transition-colors text-base"
+            >
+              Restart Game
+            </button>
+        )}
       </div>
     </div>
   );
